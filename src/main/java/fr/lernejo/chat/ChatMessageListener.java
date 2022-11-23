@@ -6,8 +6,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChatMessageListener {
 
-    public void onMessage(String mystring){
-        System.out.println(mystring);
+    final ChatMessageRepository mystack;
 
+    public ChatMessageListener(ChatMessageRepository mystack) {
+        this.mystack = mystack;
     }
+
+    public void onMessage(String mystring){
+        mystack.addChatMessage(mystring);
+        System.out.println(mystring);
+    }
+    /*public void onMessage(List<String> mymessage){
+        StringBuilder mybuilder= new StringBuilder();
+        for (String st : mymessage)
+        {
+            mybuilder.append(st);
+        }
+        String mystring = mybuilder.toString();
+        //System.out.println(mystring);
+
+    }*/
 }
